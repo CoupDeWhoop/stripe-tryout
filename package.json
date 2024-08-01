@@ -1,0 +1,15 @@
+{
+  "name": "stripe-tryout",
+  "version": "1.0.0",
+  "description": "first use of stripe",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "david greenland",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "stripe": "^16.5.0"
+  }
+}

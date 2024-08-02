@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import getAllUsers from './getAllUsers';
+import getPaymentLink from './getPaymentLink';
 
 describe('Get all users request', () => {
   let mockRequest: Partial<Request>;
@@ -17,22 +17,16 @@ describe('Get all users request', () => {
     };
   });
 
-  test('200 - users', () => {
+  test('200 - payment/:id', () => {
     const expectedStatusCode = 200;
     const expectedResponse = {
-      users: [
-        {
-          name: 'John',
-          age: 30,
-        },
-        {
-          name: 'Peter',
-          age: 40,
-        },
-      ],
+      paymentLink: {
+        url: 'https://buy.stripe.com/test_eVa5mb3n821W9tC4gr',
+        object: 'payment_link',
+      },
     };
 
-    getAllUsers(mockRequest as Request, mockResponse as Response);
+    getPaymentLink(mockRequest as Request, mockResponse as Response);
 
     expect(mockResponse.statusCode).toBe(expectedStatusCode);
     expect(responseObject).toEqual(expectedResponse);

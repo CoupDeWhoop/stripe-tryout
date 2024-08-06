@@ -15,6 +15,7 @@ async function renderCheckout(req: Request, res: Response) {
       cancel_url: `${req.protocol}://${req.get('host')}/cancel`,
     });
 
+    console.log(session.url);
     if (session.url) {
       res.redirect(303, session.url);
     } else {

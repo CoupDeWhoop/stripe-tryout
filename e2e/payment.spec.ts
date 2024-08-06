@@ -1,18 +1,29 @@
-import nock from 'nock';
 import { test, expect } from '@playwright/test';
 
-test.describe('Payment flow', () => {
-  test('should redirect to Stripe checkout on submit', async ({ page }) => {
-    const scope = nock('https://www.google.com')
-      .get('/')
-      .reply(200)
-      .on('request', (req) => {
-        console.log(`Intercepted request to ${req.url}`);
+test.describe('Intercept', () => {
+  test('should intercept external website', async ({ page }) => {
+    await page.route('https://www.google.com/**', async (route) => {
+      await route.fulfill({
+        json: { id: '343', title: 'A faked response' },
       });
+    });
 
     await page.goto('/');
     await page.click('input[type="submit"]');
 
-    expect(scope.isDone()).toBe(true);
+    await expect(page.getByText('A faked response')).toBeInViewport();
   });
 });
+
+// test("Mocks a simple api call", async ({ page }) => {
+//   page.route(
+//     "https://jsonplaceholder.typicode.com/todos/4",
+//     async (route) =>
+//       await route.fulfill({
+//         json: { id: "343", title: "A faked response" },
+//       })
+//   );
+
+//   await page.goto("http://localhost:3000/");
+//   await expect(page.getByText('A faked response')).toBeInViewport()
+// });

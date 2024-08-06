@@ -1,6 +1,7 @@
-import env from './lib/env';
+import env from './lib/env'; // need this
 import express from 'express';
 import path from 'path';
+import { Request, Response } from 'express';
 import getPaymentLink from './routes/getPaymentLink';
 import addItemToBasket from './routes/addItemToBasket';
 import { renderHomePage } from './controllers/home.controller';
@@ -16,6 +17,12 @@ app.set('views', path.join(__dirname, './views'));
 
 app.get('/', renderHomePage);
 app.post('/basket/item', addItemToBasket);
+app.get('/cancel', (req: Request, res: Response) => {
+  res.render('cancel.ejs');
+});
+app.get('/success', (req: Request, res: Response) => {
+  res.render('success.ejs');
+});
 
 app.get('/payment/:priceId', getPaymentLink);
 app.post('/create-checkout-session', renderCheckout);

@@ -85,6 +85,9 @@ dist/
 public/
 public/static/
 
+playwright-report/
+test-results/
+
 # GitHub Pages
 .surge/
 

@@ -7,14 +7,8 @@ describe('GET /payment', () => {
     nock.disableNetConnect(); // Disable all real network connections
     nock.enableNetConnect('127.0.0.1'); // allow local
   });
-
-  afterAll(() => {
-    nock.enableNetConnect(); // Re-enable
-  });
-
-  afterEach(() => {
-    nock.cleanAll(); // Clean up any pending mocks
-  });
+  afterEach(() => nock.cleanAll());
+  afterAll(() => nock.enableNetConnect());
 
   test('should return 200 and payment link', async () => {
     const priceId = 'snosno0s0son';

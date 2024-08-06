@@ -2,14 +2,14 @@
   "name": "stripe-tryout",
   "version": "1.0.0",
   "description": "first use of stripe",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
     "start": "nodemon ./src/listen.ts",
     "build": "tsc --project ./tsconfig.json",
     "test": "jest -c ./jest.unit.json",
     "test:coverage": "jest --coverage -c ./jest.unit.json"
   },
-  "author": "david greenland",
+  "author": "David Greenland",
   "license": "ISC",
   "dependencies": {
     "@types/stripe": "^8.0.416",

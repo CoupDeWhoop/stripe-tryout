@@ -61,8 +61,7 @@ describe('Home page', () => {
 
     expect(total.innerText).toBe('£60.00');
 
-    // Since there's no client-side JS handling, you can't test redirection here.
-    // You'd need an E2E test framework like Cypress for full flow testing.
+    // client side handling not possible
   });
 });
 

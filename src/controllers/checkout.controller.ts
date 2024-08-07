@@ -1,19 +1,10 @@
 import { Request, Response } from 'express';
-import stripe from '../lib/stripeClient';
+import stripe from '../lib/stripeModule';
+import createCheckoutSession from '../lib/stripeCheckout';
 
 async function renderCheckout(req: Request, res: Response) {
   try {
-    const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price: 'price_1Piygk07nWBNQfFLjJ25rQyF',
-          quantity: 2,
-        },
-      ],
-      mode: 'payment',
-      success_url: `${req.protocol}://${req.get('host')}/success`,
-      cancel_url: `${req.protocol}://${req.get('host')}/cancel`,
-    });
+    const session = await createCheckoutSession();
 
     console.log(session.url);
     if (session.url) {

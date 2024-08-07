@@ -2,7 +2,7 @@
   "preset": "ts-jest",
   "coverageDirectory": "./coverage",
   "setupFiles": ["<rootDir>/src/lib/env.ts"],
-  "testMatch": ["**/?(*.)+(spec|test).ts"],
+  "testMatch": ["**/__tests__/unit/**/*.(spec|test).(ts|js)"],
   "resetMocks": true,
   "clearMocks": true
 }

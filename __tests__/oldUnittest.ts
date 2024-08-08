@@ -1,15 +1,17 @@
 import { Request, Response } from 'express';
-import getPaymentLink from './getPaymentLink';
+import getPaymentLink from '../src/routes/getPaymentLink';
+import stripe from '../src/lib/stripeClient';
+jest.mock('../src/lib/stripeClient');
 
-describe('Get all users request', () => {
+describe('create payment link', () => {
   let mockRequest: Partial<Request>;
   let mockResponse: Partial<Response>;
   let responseObject = {};
 
   beforeEach(() => {
-    mockRequest = {};
+    mockRequest = { params: { priceId: 'price_1Piygk07nWBNQfFLjJ25rQyF' } };
     mockResponse = {
-      statusCode: 0,
+      statusCode: 200,
       //mockImplementation captures the response body into the responseObject.
       send: jest.fn().mockImplementation((result) => {
         responseObject = result;

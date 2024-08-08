@@ -4,18 +4,19 @@ import stripe from '../lib/stripeClient';
 
 export default async function getPaymentLink(req: Request, res: Response) {
   const { priceId } = req.params;
-  // const stripe = new Stripe(env.STRIPE_SECRET_KEY);
-  stripe.paymentLinks
-    .create({
+
+  try {
+    const paymentLink = await stripe.paymentLinks.create({
       line_items: [
         {
           price: priceId,
           quantity: 1,
         },
       ],
-    })
-    .then((paymentLink: Stripe.PaymentLink) => {
-      res.statusCode = 200;
-      res.send({ paymentLink });
     });
+
+    res.status(200).send({ paymentLink });
+  } catch (error) {
+    res.status(500).send({ error: 'Something went wrong' });
+  }
 }

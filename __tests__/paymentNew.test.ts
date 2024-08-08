@@ -1,17 +1,20 @@
 import request from 'supertest';
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, test, afterEach, jest } from '@jest/globals';
 import app from '../src/app';
-import stripe from '../src/lib/stripeClient';
-jest.mock('../src/lib/stripeClient');
+// import stripe from '../__mocks__/stripePayment';
 
-// not sure about this syntax. doesn't overcome typing issues
-const mockedStripe = stripe as jest.Mocked<typeof stripe>;
+jest.mock('../src/lib/stripeClient', () => {
+  return {
+    _esModule: true,
+    default: require('./__mocks__/stripePayment').default,
+  };
+});
 
 describe('GET /payment/:id', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  test('should return a payment link with a 200 status', async () => {
+  test.only('should return a payment link with a 200 status', async () => {
     const priceId = 'price_1Piygk07nWBNQfFLjJ25rQyF';
     const expectedResponse = {
       paymentLink: {
@@ -19,9 +22,6 @@ describe('GET /payment/:id', () => {
         object: 'payment_link',
       },
     };
-
-    // @ts-ignore
-    stripe.paymentLinks.create.mockResolvedValue(expectedResponse.paymentLink);
 
     const response = await request(app).get(`/payment/${priceId}`).expect(200);
 

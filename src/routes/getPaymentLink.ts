@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import Stripe from 'stripe';
 import stripe from '../lib/stripeClient';
 
 export default async function getPaymentLink(req: Request, res: Response) {
@@ -17,6 +16,7 @@ export default async function getPaymentLink(req: Request, res: Response) {
 
     res.status(200).send({ paymentLink });
   } catch (error) {
+    console.error(error);
     res.status(500).send({ error: 'Something went wrong' });
   }
 }

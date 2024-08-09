@@ -2,7 +2,7 @@
   "name": "stripe-tryout",
   "version": "1.0.0",
   "description": "first use of stripe",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
     "start": "nodemon ./src/listen.ts",
     "build": "tsc --project ./tsconfig.json",
@@ -10,7 +10,7 @@
     "test:e2e": "start-server-and-test start http://localhost:3002 'npx playwright test'",
     "test:coverage": "jest --coverage -c ./jest.unit.json"
   },
-  "author": "david greenland",
+  "author": "David Greenland",
   "license": "ISC",
   "dependencies": {
     "@types/stripe": "^8.0.416",

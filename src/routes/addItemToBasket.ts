@@ -2,4 +2,26 @@ import { Request, Response } from 'express';
 import Stripe from 'stripe';
 import env from '../lib/env';
 
-export default function addItemToBasket(req: Request, res: Response) {}
+type Product = {
+    name: string;
+    productId: number;
+    quantity: number;
+};
+
+export default function addItemToBasket(product: Product) {
+    // Extract item details from request body
+
+    let basket = JSON.parse(localStorage.getItem('basket') || '[]');
+
+    const existingItem = basket.find(
+        (item: Product) => item.productId === product.productId
+    );
+
+    if (existingItem) {
+        existingItem.quantity += product.quantity;
+    } else {
+        basket.push(product);
+    }
+
+    localStorage.setItem('basket', JSON.stringify(basket));
+}

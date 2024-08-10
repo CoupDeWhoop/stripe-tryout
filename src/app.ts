@@ -12,11 +12,11 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.set('views', path.join(__dirname, './views'));
-// app.use(express.json());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', renderHomePage);
-app.post('/basket/item', addItemToBasket);
+app.post('/basket/:item', addItemToBasket);
 app.get('/cancel', (req: Request, res: Response) => {
   res.render('cancel.ejs');
 });

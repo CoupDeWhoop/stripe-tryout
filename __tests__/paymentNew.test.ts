@@ -1,14 +1,16 @@
 import request from 'supertest';
 import { describe, expect, test, afterEach, jest } from '@jest/globals';
 import app from '../src/app';
-// import stripe from '../__mocks__/stripePayment';
 
-jest.mock('../src/lib/stripeClient', () => {
-  return {
-    _esModule: true,
-    default: require('./__mocks__/stripePayment').default,
-  };
-});
+jest.mock('../src/lib/stripeClient', () => ({
+  paymentLinks: {
+    create: () =>
+      Promise.resolve({
+        url: 'https://buy.stripe.com/test_eVa5mb3n821W9tC4gr',
+        object: 'payment_link',
+      }),
+  },
+}));
 
 describe('GET /payment/:id', () => {
   afterEach(() => {
@@ -24,7 +26,6 @@ describe('GET /payment/:id', () => {
     };
 
     const response = await request(app).get(`/payment/${priceId}`).expect(200);
-
     expect(response.body).toEqual(expectedResponse);
   });
 

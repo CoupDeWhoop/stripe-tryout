@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import Stripe from 'stripe';
-import stripe from '../lib/stripeModule';
+import { Request, Response } from "express";
+import Stripe from "stripe";
+import stripe from "../lib/stripeModule";
 
 export default async function getPaymentLink(req: Request, res: Response) {
   const { priceId } = req.params;

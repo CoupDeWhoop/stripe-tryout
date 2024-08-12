@@ -1,17 +1,17 @@
-import { Request, Response } from 'express';
-import Stripe from 'stripe';
-import env from '../lib/env';
+import { Request, Response } from "express";
+import Stripe from "stripe";
+import env from "../lib/env";
 
-type Product = {
+interface Product {
     name: string;
     productId: number;
     quantity: number;
-};
+}
 
 export default function addItemToBasket(product: Product) {
     // Extract item details from request body
 
-    let basket = JSON.parse(localStorage.getItem('basket') || '[]');
+    const basket = JSON.parse(localStorage.getItem("basket") || "[]");
 
     const existingItem = basket.find(
         (item: Product) => item.productId === product.productId
@@ -23,5 +23,5 @@ export default function addItemToBasket(product: Product) {
         basket.push(product);
     }
 
-    localStorage.setItem('basket', JSON.stringify(basket));
+    localStorage.setItem("basket", JSON.stringify(basket));
 }

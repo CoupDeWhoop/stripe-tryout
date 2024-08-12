@@ -1,7 +1,7 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 
-import { cleanEnv, str } from 'envalid';
+import { cleanEnv, str } from "envalid";
 
 // helped when I was resuing key in different modules
 const env = cleanEnv(process.env, {

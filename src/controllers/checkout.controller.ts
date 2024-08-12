@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import stripe from '../lib/stripeClient';
+import { stripe } from '../lib/stripeClient';
 
 async function renderCheckout(req: Request, res: Response) {
   try {

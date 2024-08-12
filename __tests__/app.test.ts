@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from '../src/app';
 import nock from 'nock';
 
-describe.skip('GET /payment', () => {
+describe('GET /payment', () => {
   beforeAll(() => {
     nock.disableNetConnect(); // Disable all real network connections
     nock.enableNetConnect('127.0.0.1'); // allow local

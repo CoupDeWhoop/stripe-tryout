@@ -6,8 +6,6 @@ if (!env.STRIPE_SECRET_KEY) {
   console.error('Stripe key not set', errCode);
 }
 
-const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
+export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   apiVersion: '2024-06-20',
 });
-
-export default stripe;
